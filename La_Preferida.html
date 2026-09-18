@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e31b16">
+<meta name="description" content="Pizzaria & Esfiharia Lá Preferida — O Jeito Agradável de Servir.">
+<title>Lá Preferida | Pizzaria & Esfiharia</title>
+<style>
+:root{
+  --red:#e31b16; --orange:#ff7a00; --green:#25d366; --yellow:#ffd83d;
+  --dark:#0d0d0d; --dark2:#171717; --muted:#bdbdbd; --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:#fff; font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,122,0,.10),transparent 30%),
+    linear-gradient(135deg,#090909,#191919 50%,#0b0b0b);
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  min-height:92vh; display:flex; align-items:center; position:relative; overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.55)),
+    radial-gradient(circle at 85% 25%,rgba(227,27,22,.28),transparent 30%);
+}
+header:after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.12;
+  background-image:linear-gradient(45deg,#fff 1px,transparent 1px);
+  background-size:22px 22px;
+  mask-image:linear-gradient(to bottom,transparent,black 25%,black 75%,transparent);
+}
+.hero{position:relative;z-index:1;padding:70px 0}
+.badge{
+  display:inline-block;background:var(--yellow);color:#111;font-weight:900;
+  padding:9px 18px;border-radius:999px;text-transform:uppercase;font-size:.82rem;
+}
+.logo{font-size:clamp(3.2rem,9vw,7rem);line-height:.86;font-weight:1000;letter-spacing:-4px;margin:22px 0}
+.logo .la{color:var(--red)} .logo .pref{color:#fff} .logo .rida{color:#24e83a}
+.hero h2{font-size:clamp(1.2rem,3vw,2rem);margin:0 0 14px;color:#f2f2f2}
+.hero p{max-width:650px;color:#ddd;font-size:1.08rem;line-height:1.6}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 20px;border-radius:12px;font-weight:800;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{background:var(--red)} .btn-green{background:var(--green);color:#06140a}
+.btn-dark{border:1px solid #555;background:#181818}
+.section{padding:70px 0}
+.section-title{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 10px}
+.section-sub{color:#bbb;margin:0 0 28px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0 35px}
+.search{
+  flex:1;min-width:230px;background:#161616;border:1px solid #444;color:#fff;
+  padding:14px 16px;border-radius:12px;font-size:1rem;outline:none
+}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid #444;background:#171717;color:#ddd;padding:10px 13px;border-radius:999px;cursor:pointer}
+.chip.active{background:var(--yellow);color:#111;border-color:var(--yellow);font-weight:800}
+.category{margin:42px 0}
+.category h3{
+  display:inline-block;background:var(--yellow);color:#111;padding:9px 22px;border-radius:999px;
+  margin:0 0 18px;font-size:1.35rem
+}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{
+  background:linear-gradient(145deg,#191919,#101010);border:1px solid #2e2e2e;
+  border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.2)
+}
+.card h4{margin:0 0 7px;color:#f0522c;font-family:Georgia,serif;font-size:1.35rem}
+.card p{margin:0;color:#d5d5d5;line-height:1.45;font-size:.95rem}
+.prices{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.price{background:#242424;border-radius:9px;padding:7px 9px;font-weight:800;font-size:.9rem}
+.price small{color:#e85b3a;display:block;font-size:.7rem;margin-bottom:2px}
+.simple .price{background:transparent;padding-left:0;font-size:1.05rem}
+.hidden{display:none!important}
+.callout{
+  margin-top:45px;border:1px solid #393939;border-radius:20px;padding:26px;
+  background:linear-gradient(110deg,rgba(227,27,22,.16),rgba(37,211,102,.08))
+}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+.contact{
+  padding:18px;border-radius:14px;background:#151515;border:1px solid #333
+}
+.contact strong{display:block;margin-bottom:6px}
+footer{border-top:1px solid #2c2c2c;padding:30px 0;color:#aaa;text-align:center}
+.float{
+  position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;
+  background:var(--green);color:#07150b;display:grid;place-items:center;font-size:1.6rem;
+  box-shadow:0 8px 25px rgba(0,0,0,.4);z-index:20
+}
+.note{font-size:.82rem;color:#888;margin-top:15px}
+@media(max-width:720px){
+  header{min-height:auto}
+  .hero{padding:55px 0 70px}
+  .logo{letter-spacing:-2px}
+  .grid,.contact-grid{grid-template-columns:1fr}
+  .section{padding:52px 0}
+  .btn{width:100%}
+  .actions{display:grid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container hero">
+    <span class="badge">Pizzaria & Esfiharia</span>
+    <div class="logo"><span class="la">Lá</span> <span class="pref">Pre<span class="rida">ferida</span></span></div>
+    <h2>“O Jeito Agradável de Servir.”</h2>
+    <p>Confira o cardápio da Lá Preferida com pizzas, esfihas, doces, salgados, porções e bebidas. Tudo nesta página foi transcrito do cardápio fornecido.</p>
+    <div class="actions">
+      <a class="btn btn-red" href="#cardapio">🍕 Ver cardápio</a>
+      <a class="btn btn-green" href="https://wa.me/5588997211323?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido%20na%20L%C3%A1%20Preferida." target="_blank" rel="noopener">💬 WhatsApp 1</a>
+      <a class="btn btn-dark" href="https://wa.me/5588996356394?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido%20na%20L%C3%A1%20Preferida." target="_blank" rel="noopener">💬 WhatsApp 2</a>
+      <a class="btn btn-dark" href="https://drive.google.com/file/d/1iPSroZ2Ko7zQf7FEBXxHvdytVTsmXfQO/view?usp=drivesdk" target="_blank" rel="noopener">📄 Cardápio em PDF</a>
+    </div>
+  </div>
+</header>
+
+<main id="cardapio" class="section">
+<div class="container">
+  <h2 class="section-title">Nosso cardápio</h2>
+  <p class="section-sub">Pesquise um item ou filtre por categoria.</p>
+
+  <div class="toolbar">
+    <input id="search" class="search" type="search" placeholder="🔎 Procurar no cardápio..." aria-label="Procurar no cardápio">
+    <div class="chips">
+      <button class="chip active" data-filter="all">Tudo</button>
+      <button class="chip" data-filter="pizzas">Pizzas</button>
+      <button class="chip" data-filter="esfihas">Esfihas</button>
+      <button class="chip" data-filter="doces">Pizzas doces</button>
+      <button class="chip" data-filter="salgados">Salgados e porções</button>
+      <button class="chip" data-filter="bebidas">Bebidas</button>
+    </div>
+  </div>
+
+  <section class="category menu-category" data-category="pizzas">
+    <h3>Pizzas</h3>
+    <div class="grid">
+
+      <article class="card item"><h4>Americana</h4><p>Presunto, Muçarela e Tomate.</p><div class="prices"><span class="price"><small>P</small>R$ 27,00</span><span class="price"><small>M</small>R$ 31,00</span><span class="price"><small>G</small>R$ 35,00</span></div></article>
+      <article class="card item"><h4>Calabresa</h4><p>Calabresa, Cebola e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 35,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Portuguesa</h4><p>Presunto, Ovo, Cebola, Ervilha e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Frango</h4><p>Frango, Catupiry e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Bacon</h4><p>Bacon e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 35,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Da casa</h4><p>Presunto, Frango, Palmito e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 34,00</span><span class="price"><small>G</small>R$ 38,00</span></div></article>
+      <article class="card item"><h4>Baiana</h4><p>Calabresa, Pimenta, Cebola, Ovo e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 37,00</span></div></article>
+      <article class="card item"><h4>Chefe</h4><p>Presunto, Frango, Calabresa, Palmito, milho, Catupiry e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Carne de Sol</h4><p>Carne de Sol e muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Marquerita</h4><p>Muçarela, Tomate e Manjericão.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Calabacon</h4><p>Calabresa, Bacon, Cebola, Milho, Catupiry, Tomate e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+
+      <article class="card item"><h4>Misto</h4><p>Presunto e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Quatro Queijos</h4><p>Muçarela, Catupiry, Parmesão e Provolone.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Strogonoff</h4><p>Strogonoff de Carne ou Frango, Muçarela ou Catupiry.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>A moda</h4><p>Palmito, Ovo, Ervilha e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 34,00</span><span class="price"><small>G</small>R$ 38,00</span></div></article>
+      <article class="card item"><h4>Brócolis</h4><p>Brócolis e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 34,00</span><span class="price"><small>G</small>R$ 38,00</span></div></article>
+      <article class="card item"><h4>Tanto faz</h4><p>Muçarela, Carne de Sol, Bacon e Cream Cheese.</p><div class="prices"><span class="price"><small>P</small>R$ 34,00</span><span class="price"><small>M</small>R$ 40,00</span><span class="price"><small>G</small>R$ 45,00</span></div></article>
+      <article class="card item"><h4>Qualquer coisa</h4><p>Muçarela, Frango, Bacon e Cream Cheese.</p><div class="prices"><span class="price"><small>P</small>R$ 34,00</span><span class="price"><small>M</small>R$ 40,00</span><span class="price"><small>G</small>R$ 45,00</span></div></article>
+      <article class="card item"><h4>Mega</h4><p>Frango, Cheddar e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>Pizzaiolo</h4><p>Lombo, Palmito, Tomate e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Pepperoni</h4><p>Pepperoni e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Siciliana</h4><p>Bacon, Palmito, Cebola e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+
+      <article class="card item"><h4>Nordestina</h4><p>Carne de Sol, Ovo, Cebola e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Camarão</h4><p>Camarão e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 40,00</span><span class="price"><small>M</small>R$ 45,00</span><span class="price"><small>G</small>R$ 50,00</span></div></article>
+      <article class="card item"><h4>Caipira</h4><p>Frango, Milho, Ovo e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 32,00</span><span class="price"><small>M</small>R$ 36,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Bacon especial</h4><p>Bacon, Milho, Cebola, Tomate e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 34,00</span><span class="price"><small>M</small>R$ 38,00</span><span class="price"><small>G</small>R$ 42,00</span></div></article>
+      <article class="card item"><h4>Neves</h4><p>Carne moída, Carne de Sol, Palmito, Bacon, Calabresa e Tomate.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 34,00</span><span class="price"><small>G</small>R$ 38,00</span></div></article>
+      <article class="card item"><h4>Italiana</h4><p>Muçarela, Presunto, Frango, Parmesão e Tomate.</p><div class="prices"><span class="price"><small>P</small>R$ 28,00</span><span class="price"><small>M</small>R$ 32,00</span><span class="price"><small>G</small>R$ 36,00</span></div></article>
+      <article class="card item"><h4>X Tudo</h4><p>Calabresa, Presunto, Frango, Carne de sol, Bacon, Catupiry, Cheddar e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 34,00</span><span class="price"><small>M</small>R$ 38,00</span><span class="price"><small>G</small>R$ 42,00</span></div></article>
+      <article class="card item"><h4>Toscana</h4><p>Calabresa moída, Cebola, Muçarela ou Catupiry.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 34,00</span><span class="price"><small>G</small>R$ 38,00</span></div></article>
+    </div>
+  </section>
+
+  <section class="category menu-category" data-category="esfihas">
+    <h3>Esfihas</h3>
+    <div class="grid">
+      <article class="card item simple"><h4>Carne de Sol</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Camarão</h4><div class="prices"><span class="price">R$ 9,00</span></div></article>
+      <article class="card item simple"><h4>Carne moída</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Quatro Queijos</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Calabresa</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Atum</h4><div class="prices"><span class="price">R$ 8,00</span></div></article>
+      <article class="card item simple"><h4>Misto</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Baiana</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Frango</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Queijo</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Carne com Queijo</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Napolitana</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Palmito</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Brócolis</h4><div class="prices"><span class="price">R$ 6,00</span></div></article>
+      <article class="card item simple"><h4>Strogonoff</h4><div class="prices"><span class="price">R$ 8,00</span></div></article>
+      <article class="card item simple"><h4>Catupiry</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+    </div>
+
+    <div class="category">
+      <h3>Esfihas doces</h3>
+      <div class="grid">
+        <article class="card item simple"><h4>Banana</h4><div class="prices"><span class="price">R$ 8,00</span></div></article>
+        <article class="card item simple"><h4>Romeu e Julieta</h4><div class="prices"><span class="price">R$ 7,00</span></div></article>
+        <article class="card item simple"><h4>Chocolate</h4><div class="prices"><span class="price">R$ 8,00</span></div></article>
+        <article class="card item simple"><h4>Chocolate c/MM</h4><div class="prices"><span class="price">R$ 9,00</span></div></article>
+        <article class="card item simple"><h4>Beijinho</h4><div class="prices"><span class="price">R$ 8,00</span></div></article>
+        <article class="card item simple"><h4>Kinder</h4><div class="prices"><span class="price">R$ 9,00</span></div></article>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Esfihas fechadas</h3>
+      <p>Preço informado no cardápio: <strong>R$ 10,00</strong>.</p>
+    </div>
+  </section>
+
+  <section class="category menu-category" data-category="doces">
+    <h3>Pizzas doces</h3>
+    <div class="grid">
+      <article class="card item"><h4>Banana</h4><p>Leite Condensado, Banana e Canela.</p><div class="prices"><span class="price"><small>P</small>R$ 27,00</span><span class="price"><small>M</small>R$ 31,00</span><span class="price"><small>G</small>R$ 35,00</span></div></article>
+      <article class="card item"><h4>Romeu e Julieta</h4><p>Goiabada e Muçarela.</p><div class="prices"><span class="price"><small>P</small>R$ 30,00</span><span class="price"><small>M</small>R$ 35,00</span><span class="price"><small>G</small>R$ 40,00</span></div></article>
+      <article class="card item"><h4>Chocolate</h4><p>Chocolate ao Leite.</p><div class="prices"><span class="price"><small>P</small>R$ 45,00</span><span class="price"><small>M</small>R$ 45,00</span><span class="price"><small>G</small>R$ 55,00</span></div></article>
+      <article class="card item"><h4>Chocolate Branco</h4><p>Chocolate Branco.</p><div class="prices"><span class="price"><small>P</small>R$ 45,00</span><span class="price"><small>M</small>R$ 45,00</span><span class="price"><small>G</small>R$ 55,00</span></div></article>
+      <article class="card item"><h4>Kinder</h4><p>Chocolate Preto e Chocolate Branco.</p><div class="prices"><span class="price"><small>P</small>R$ 45,00</span><span class="price"><small>M</small>R$ 45,00</span><span class="price"><small>G</small>R$ 55,00</span></div></article>
+      <article class="card item"><h4>Beijinho</h4><p>Beijinho e coco Ralado</p><div class="prices"><span class="price"><small>P</small>R$ 45,00</span><span class="price"><small>M</small>R$ 45,00</span><span class="price"><small>G</small>R$ 55,00</span></div></article>
+    </div>
+  </section>
+
+  <section class="category menu-category" data-category="salgados">
+    <h3>Salgados e Porções</h3>
+    <div class="grid">
+      <article class="card item"><h4>Calzone</h4><p>Todos os ingredientes.</p><div class="prices"><span class="price"><small>P</small>R$ 20,00</span><span class="price"><small>G</small>R$ 28,00</span></div></article>
+      <article class="card item"><h4>Beirute</h4><p>Carne de Sol ou Frango, Tomate, Salada, Muçarela e Catupiry.</p><div class="prices"><span class="price">R$ 25,00</span></div></article>
+      <article class="card item"><h4>Batata Frita</h4><div class="prices"><span class="price">R$ 20,00</span></div></article>
+      <article class="card item"><h4>Batata Frita c/Bacon e Cheddar</h4><div class="prices"><span class="price">R$ 30,00</span></div></article>
+    </div>
+  </section>
+
+  <section class="category menu-category" data-category="bebidas">
+    <h3>Bebidas</h3>
+    <div class="grid">
+      <article class="card item simple"><h4>Refrigerante 2L</h4><div class="prices"><span class="price">R$ 15,00</span></div></article>
+      <article class="card item simple"><h4>Refrigerante 1L</h4><div class="prices"><span class="price">R$ 10,00</span></div></article>
+      <article class="card item simple"><h4>Refrigerante Lata</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Cerveja 300 ML</h4><div class="prices"><span class="price">R$ 5,00</span></div></article>
+      <article class="card item simple"><h4>Sucos</h4><div class="prices"><span class="price">R$ 7,00</span></div></article>
+      <article class="card item simple"><h4>Água</h4><div class="prices"><span class="price">R$ 3,00</span></div></article>
+      <article class="card item simple"><h4>Água com gás</h4><div class="prices"><span class="price">R$ 4,00</span></div></article>
+    </div>
+  </section>
+
+  <div class="callout">
+    <h2>Faça seu pedido</h2>
+    <p>Escolha o WhatsApp e envie sua mensagem.</p>
+    <div class="contact-grid">
+      <a class="contact" href="https://wa.me/5588997211323?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido%20na%20L%C3%A1%20Preferida." target="_blank" rel="noopener"><strong>WhatsApp 1</strong>(88) 99721-1323</a>
+      <a class="contact" href="https://wa.me/5588996356394?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido%20na%20L%C3%A1%20Preferida." target="_blank" rel="noopener"><strong>WhatsApp 2</strong>(88) 99635-6394</a>
+    </div>
+    <p class="note">Os preços e itens desta página foram baseados no PDF do cardápio fornecido. Nenhum produto ou preço foi acrescentado por conta própria.</p>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <strong>Pizzaria & Esfiharia Lá Preferida</strong><br>
+    O Jeito Agradável de Servir.
+  </div>
+</footer>
+
+<a class="float" href="https://wa.me/5588997211323?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido%20na%20L%C3%A1%20Preferida." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">💬</a>
+
+<script>
+const search = document.getElementById('search');
+const chips = document.querySelectorAll('.chip');
+const categories = document.querySelectorAll('.menu-category');
+
+function normalize(text){
+  return text.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');
+}
+function filterMenu(){
+  const q = normalize(search.value.trim());
+  const active = document.querySelector('.chip.active').dataset.filter;
+  categories.forEach(section=>{
+    const sectionCat = section.dataset.category;
+    const categoryMatch = active === 'all' || active === sectionCat;
+    let visible = 0;
+    section.querySelectorAll('.item').forEach(item=>{
+      const match = normalize(item.innerText).includes(q);
+      const show = categoryMatch && match;
+      item.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    section.classList.toggle('hidden', visible === 0);
+  });
+}
+chips.forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    filterMenu();
+  });
+});
+search.addEventListener('input',filterMenu);
+</script>
+</body>
+</html>
